@@ -63,5 +63,5 @@ func _on_user_guessed(guess: String):
 	if current_row >= guess_container.get_child_count():
 		game_state.lose()
 
-func restart():
+func reset():
 	get_tree().reload_current_scene()
