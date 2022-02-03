@@ -19,6 +19,10 @@ func lose():
 func play():
 	_set_game_state(States.PLAYING)
 
+func is_play(): 
+	return game_state == States.PLAYING
+
+
 func _set_game_state(new_game_state):
 	game_state = new_game_state
 	emit_signal("state_change", new_game_state)

@@ -1,18 +1,11 @@
 extends Control
 
 onready var guess_container := $CenterContainer/VBoxContainer/Guesses
-onready var win_screen := $CenterContainer/WinScreen
-onready var lose_screen := $CenterContainer/LoseScreen
+onready var game_state: GameState = preload("res://game_state.tres")
+
 var current_row: int = 0
 var solution: String
 var word_set: Dictionary = {}
-
-enum GameState {
-	PLAYING,
-	WIN,
-	LOSE
-}
-var game_state: int setget _set_game_state
 
 func _ready():
 	randomize()
@@ -20,7 +13,7 @@ func _ready():
 	_load_words()
 	solution = _get_random_word()
 	
-	_set_game_state(GameState.PLAYING)
+	game_state.play()
 
 func _load_words():
 	var word_file := File.new()
@@ -42,7 +35,7 @@ func _get_random_word():
 	return keys[randi() % keys.size()]
 
 func _on_user_guessed(guess: String):
-	if game_state != GameState.PLAYING:
+	if !game_state.is_play():
 		return
 	if !word_set.has(guess):
 		return
@@ -62,27 +55,13 @@ func _on_user_guessed(guess: String):
 			letters[i].state = 3
 	
 	if correct_letters == solution.length():
-		_set_game_state(GameState.WIN)
+		game_state.win()
 		return
 	
 	current_row += 1
 	
 	if current_row >= guess_container.get_child_count():
-		_set_game_state(GameState.LOSE)
-
-func _set_game_state(new_game_state):
-	game_state = new_game_state
-	
-	print(game_state)
-	if game_state == GameState.PLAYING:
-		win_screen.hide()
-		lose_screen.hide()
-	elif game_state == GameState.WIN:
-		win_screen.show()
-		lose_screen.hide()
-	elif game_state == GameState.LOSE:
-		win_screen.hide()
-		lose_screen.show()
+		game_state.lose()
 
 func restart():
 	get_tree().reload_current_scene()
