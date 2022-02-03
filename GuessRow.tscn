@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://LetterPanel.gd" type="Script" id=1]
+[ext_resource path="res://LetterPanel.tscn" type="PackedScene" id=2]
+
+[node name="GuessRow" type="HBoxContainer"]
+margin_right = 216.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Letter1" type="Panel" parent="." instance=ExtResource( 2 )]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+correct_position_color = Color( 0.329412, 0.74902, 0.176471, 1 )
+correct_letter_color = Color( 0.898039, 0.854902, 0.184314, 1 )
+
+[node name="Letter2" type="Panel" parent="." instance=ExtResource( 2 )]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+correct_position_color = Color( 0.329412, 0.74902, 0.176471, 1 )
+correct_letter_color = Color( 0.898039, 0.854902, 0.184314, 1 )
+
+[node name="Letter3" type="Panel" parent="." instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+correct_position_color = Color( 0.329412, 0.74902, 0.176471, 1 )
+correct_letter_color = Color( 0.898039, 0.854902, 0.184314, 1 )
+
+[node name="Letter4" type="Panel" parent="." instance=ExtResource( 2 )]
+margin_left = 132.0
+margin_right = 172.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+correct_position_color = Color( 0.329412, 0.74902, 0.176471, 1 )
+correct_letter_color = Color( 0.898039, 0.854902, 0.184314, 1 )
+
+[node name="Letter5" type="Panel" parent="." instance=ExtResource( 2 )]
+margin_left = 176.0
+margin_right = 216.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+correct_position_color = Color( 0.329412, 0.74902, 0.176471, 1 )
+correct_letter_color = Color( 0.898039, 0.854902, 0.184314, 1 )
