@@ -44,7 +44,7 @@ func _on_user_guessed(guess: String):
 	var correct_letters = 0
 	for i in range(0, letters.size()):
 		var letter = guess.substr(i, 1)
-		letters[i].letter = letter
+		letters[i].letter = letter.to_upper()
 		
 		if letter == solution.substr(i, 1):
 			letters[i].state = 1

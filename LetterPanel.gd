@@ -10,6 +10,14 @@ export(int, "empty", "correct_position", "correct_letter", "incorrect_letter") v
 func _ready():
 	update_look()
 
+func _set_correct_position_color(color):
+	correct_position_color = color
+	update_look()
+
+func _set_correct_letter_color(color):
+	correct_letter_color = color
+	update_look()
+
 func _set_letter(new_letter: String):
 	assert(new_letter.length() <= 1)
 	$Label.text = new_letter
@@ -33,7 +41,7 @@ func update_look():
 
 func set_color(color: Color):
 	var default_stylebox := get_stylebox("panel").duplicate()
-	default_stylebox.modulate_color = color
+	default_stylebox.bg_color = color
 	
 	add_stylebox_override("panel", default_stylebox)
 
