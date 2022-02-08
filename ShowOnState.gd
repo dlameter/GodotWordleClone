@@ -2,6 +2,8 @@ extends Control
 
 export(GameState.States) var show_state
 
+signal show
+
 onready var game_state: GameState = preload("res://game_state.tres")
 
 func _ready():
@@ -11,5 +13,6 @@ func _ready():
 func update_visibility(new_state):
 	if show_state == new_state:
 		show()
+		emit_signal("show")
 	else:
 		hide()
