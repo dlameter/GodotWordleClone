@@ -3,6 +3,7 @@ extends Panel
 
 export(Color) var correct_position_color setget _set_correct_position_color
 export(Color) var correct_letter_color setget _set_correct_letter_color
+export(Color) var incorrect_letter_color setget _set_incorrect_letter_color
 
 export(String) var letter setget _set_letter
 export(int, "empty", "correct_position", "correct_letter", "incorrect_letter") var state setget _set_state
@@ -16,6 +17,10 @@ func _set_correct_position_color(color):
 
 func _set_correct_letter_color(color):
 	correct_letter_color = color
+	update_look()
+
+func _set_incorrect_letter_color(color):
+	incorrect_letter_color = color
 	update_look()
 
 func _set_letter(new_letter: String):
@@ -36,7 +41,7 @@ func update_look():
 	elif state == 2:
 		set_color(correct_letter_color)
 	elif state == 3:
-		reset_color()
+		set_color(incorrect_letter_color)
 	update()
 
 func set_color(color: Color):

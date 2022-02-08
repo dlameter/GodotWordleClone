@@ -1,6 +1,8 @@
 extends Control
 
-onready var guess_container := $CenterContainer/VBoxContainer/Guesses
+signal letter_result(letter, state)
+
+onready var guess_container := $CenterContainer/HBoxContainer/VBoxContainer/Guesses
 onready var game_state: GameState = preload("res://game_state.tres")
 
 var current_row: int = 0
@@ -49,10 +51,13 @@ func _on_user_guessed(guess: String):
 		if letter == solution.substr(i, 1):
 			letters[i].state = 1
 			correct_letters += 1
+			emit_signal("letter_result", letter, 1)
 		elif solution.count(letter) > 0:
 			letters[i].state = 2
+			emit_signal("letter_result", letter, 2)
 		else:
 			letters[i].state = 3
+			emit_signal("letter_result", letter, 3)
 	
 	if correct_letters == solution.length():
 		game_state.win()
