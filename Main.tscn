@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UserInput.gd" type="Script" id=1]
 [ext_resource path="res://GuessRow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://ShowOnState.gd" type="Script" id=4]
 [ext_resource path="res://LetterManager.gd" type="Script" id=5]
+[ext_resource path="res://FillWord.gd" type="Script" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -106,24 +107,26 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LoseScreen/CenterContainer"]
-margin_left = 395.0
+margin_left = 418.0
 margin_top = 263.0
-margin_right = 629.0
+margin_right = 605.0
 margin_bottom = 337.0
 
 [node name="LoseScreen" type="Label" parent="LoseScreen/CenterContainer/VBoxContainer"]
-margin_right = 184.0
-margin_bottom = 31.0
-text = "You failed to guess the word.
-  Better luck next time!"
+margin_right = 187.0
+margin_bottom = 37.0
+text = "The word was %s.
+Better luck next time!"
+align = 1
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="LoseScreen/CenterContainer/VBoxContainer"]
-margin_top = 35.0
-margin_right = 184.0
-margin_bottom = 55.0
+margin_top = 41.0
+margin_right = 187.0
+margin_bottom = 74.0
 text = "Play with a new word"
 
 [node name="WinScreen" type="ColorRect" parent="."]
@@ -142,23 +145,28 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WinScreen/CenterContainer"]
-margin_left = 399.0
-margin_top = 273.0
-margin_right = 625.0
-margin_bottom = 327.0
+margin_left = 418.0
+margin_top = 263.0
+margin_right = 605.0
+margin_bottom = 337.0
 
 [node name="WinScreen" type="Label" parent="WinScreen/CenterContainer/VBoxContainer"]
-margin_right = 177.0
-margin_bottom = 14.0
-text = "You guessed the right word!"
+margin_right = 187.0
+margin_bottom = 37.0
+text = "You won!
+The word was %s"
+align = 1
+script = ExtResource( 6 )
 
 [node name="Button" type="Button" parent="WinScreen/CenterContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 177.0
-margin_bottom = 38.0
+margin_top = 41.0
+margin_right = 187.0
+margin_bottom = 74.0
 text = "Play with a new word"
 
 [connection signal="letter_result" from="." to="CenterContainer/HBoxContainer/GridContainer" method="update_letter"]
+[connection signal="loss" from="." to="LoseScreen/CenterContainer/VBoxContainer/LoseScreen" method="set_word"]
+[connection signal="win" from="." to="WinScreen/CenterContainer/VBoxContainer/WinScreen" method="set_word"]
 [connection signal="text_entered" from="CenterContainer/HBoxContainer/VBoxContainer/UserInput" to="CenterContainer/HBoxContainer/VBoxContainer/UserInput" method="_on_text_entered"]
 [connection signal="user_guessed" from="CenterContainer/HBoxContainer/VBoxContainer/UserInput" to="." method="_on_user_guessed"]
 [connection signal="pressed" from="LoseScreen/CenterContainer/VBoxContainer/Button" to="." method="reset"]

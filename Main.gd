@@ -1,6 +1,8 @@
 extends Control
 
 signal letter_result(letter, state)
+signal win(word)
+signal loss(word)
 
 onready var guess_container := $CenterContainer/HBoxContainer/VBoxContainer/Guesses
 onready var game_state: GameState = preload("res://game_state.tres")
@@ -50,12 +52,14 @@ func _on_user_guessed(guess: String):
 	
 	if correct_letters == solution.length():
 		game_state.win()
+		emit_signal("win", solution)
 		return
 	
 	current_row += 1
 	
 	if current_row >= guess_container.get_child_count():
 		game_state.lose()
+		emit_signal("loss", solution)
 
 func reset():
 	get_tree().reload_current_scene()
