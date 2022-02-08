@@ -4,6 +4,7 @@ signal letter_result(letter, state)
 
 onready var guess_container := $CenterContainer/HBoxContainer/VBoxContainer/Guesses
 onready var game_state: GameState = preload("res://game_state.tres")
+onready var word_set_resource = preload("res://word_set_generated.tres")
 
 var current_row: int = 0
 var solution: String
@@ -18,19 +19,7 @@ func _ready():
 	game_state.play()
 
 func _load_words():
-	var word_file := File.new()
-	word_file.open("res://words.txt", File.READ)
-	
-	while not word_file.eof_reached():
-		var word := word_file.get_line().strip_edges().to_lower()
-		
-		if word.length() != 5:
-			print("Tried to read in word '%s' that is not length 5" % word)
-			continue
-		
-		word_set[word] = true
-	
-	print("Finished reading in words")
+	word_set = word_set_resource.word_set
 
 func _get_random_word():
 	var keys := word_set.keys()
